@@ -1,0 +1,2 @@
+1. Устанавливаем mpdf ->
+    composer require mpdf/mpdf
