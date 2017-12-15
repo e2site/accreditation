@@ -33,7 +33,7 @@ class PDFGenerator
     public function __construct(AccreditationUser $user,AccreditationGroup $group){
         $this->mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
-            'format' => 'A4',
+            'format' => 'A6',
             'margin_left'=>0,
             'margin_right'=>0,
             'margin_top'=>0,
