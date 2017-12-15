@@ -169,7 +169,14 @@ Yii::app()->getClientScript()->registerScriptFile($mainAssets . '/js/webcam.js')
     <?php if(!$model->getIsNewRecord()):?>
         <div class="row">
             <div class="col-sm-4">
-                <a class="btn btn-primary" target="_blank" href="<?= $model->getPrintUrl();?>">Печать</a>
+                <p>
+                <a class="btn btn-warning" target="_blank" href="<?= $model->getPrintUrl();?>">Печать</a>
+                    <?php if( $model->issued != AccreditationUser::IS_SUED):?>
+                        <a class="btn btn-success " id="getAccreditation" href="#getAccreditation" data-id="<?=$model->id;?>">Выдать</a>
+                    <?php else: ?>
+                        <span class="label label-success">Аккредитация выдана</span>
+                    <?php endif; ?>
+                </p>
             </div>
         </div>
     <?php endif;?>
@@ -225,7 +232,25 @@ Yii::app()->getClientScript()->registerScriptFile($mainAssets . '/js/webcam.js')
 
 <?php
 Yii::app()->getClientScript()->registerScript('webcam',"
-var cropper=null;
+    $('#getAccreditation').click(function(){
+        id = $(this).data('id');
+        $.ajax({
+            url: '".AccreditationUser::model()->getIssuedUrl()."',
+            type: \"GET\",
+            data:{
+                id: id
+            },
+            dataType: \"json\",
+            success: function (data) {
+                if(data==1) {
+                    $('#getAccreditation').hide();
+                }
+            }
+        });
+    });
+
+
+        var cropper=null;
 		var w = new WebCam({
 			canvas:document.getElementById(\"c\"),
 			video:document.getElementById(\"v\"),
@@ -261,3 +286,6 @@ var cropper=null;
 ",CClientScript::POS_LOAD);
 
 ?>
+<script>
+
+</script>

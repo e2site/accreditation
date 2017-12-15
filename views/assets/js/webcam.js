@@ -62,7 +62,18 @@ var WebCam = function(paramObject){
             var urlFile = url.createObjectURL(e.target.files[0]);
             var img = new Image();
             img.onload = function() {
+                context.clearRect(0, 0, finalParams.canvas.width, finalParams.canvas.height);
+                if((img.width > img.height) && (img.width >finalParams.width )) {
+                    sL = img.width / 800;
+                    img.width = 800;
+                    img.height = parseInt(img.height / sL);
+                } else if((img.height > img.width) && (img.height >finalParams.height)) {
+                    sW = img.height / 600;
+                    img.height = 600;
+                    img.width = parseInt(img.width / sW);
+                }
                 context.drawImage(img,0,0,img.width,img.height);
+
                 if(finalParams.fncTakePhoto != null) {
                     finalParams.fncTakePhoto();
                 }

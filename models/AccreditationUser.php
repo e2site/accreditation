@@ -266,7 +266,7 @@ class AccreditationUser extends yupe\models\YModel
 	}
 
 	public function getPrintLink(){
-		return CHtml::link('Печать',$this->getPrintUrl(),['class'=>'label label-info printclk','data-id'=>$this->id]);
+		return CHtml::link('Печать',$this->getPrintUrl(),['class'=>'label label-info printclk','data-id'=>$this->id,'target'=>'_blank']);
 	}
 
 
