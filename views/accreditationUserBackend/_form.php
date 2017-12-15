@@ -171,7 +171,7 @@ Yii::app()->getClientScript()->registerScriptFile($mainAssets . '/js/webcam.js')
             <div class="col-sm-4">
                 <p>
                 <a class="btn btn-warning" target="_blank" href="<?= $model->getPrintUrl();?>">Печать</a>
-                    <?php if( $model->issued != AccreditationUser::IS_SUED):?>
+                    <?php if( $model->issued != AccreditationUser::IS_SUED): ?>
                         <a class="btn btn-success " id="getAccreditation" href="#getAccreditation" data-id="<?=$model->id;?>">Выдать</a>
                     <?php else: ?>
                         <span class="label label-success">Аккредитация выдана</span>

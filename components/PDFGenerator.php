@@ -93,8 +93,10 @@ class PDFGenerator
 
         $this->buffer = str_replace('$firstname',$this->user->firstname,$this->buffer);
         $this->buffer = str_replace('$lastname',$this->user->lastname,$this->buffer);
+        $this->buffer = str_replace('$surname',$this->user->surname,$this->buffer);
         $this->buffer = str_replace('$photo',$this->user->photo,$this->buffer);
-
+        $this->buffer = str_replace('$group',$this->group->name,$this->buffer);
+        $this->buffer = str_replace('$barcode',$this->user->barcode,$this->buffer);
 
         $this->buffer = str_replace('$f_size',$size,$this->buffer);
         $this->buffer = str_replace('$l_size',$size,$this->buffer);
