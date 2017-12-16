@@ -52,7 +52,7 @@ class AccreditationUser extends yupe\models\YModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstname, lastname, surname, barcode', 'required'),
+			array('firstname, lastname, barcode', 'required'),
 			array('group_id, create_user_id, update_user_id, create_date, update_date, is_print, issued, status', 'numerical', 'integerOnly'=>true),
 			array('firstname, lastname, surname, photo', 'length', 'max'=>250),
 			array('barcode', 'length', 'max'=>64),
@@ -232,7 +232,18 @@ class AccreditationUser extends yupe\models\YModel
 
 
 	public function makeBarcode(){
-		$barcode = date('Nymdv').rand(10,99).date('hm');
+		$cr = new CDbCriteria();
+		$cr->select="MAX(id) as id";
+		$accred = AccreditationUser::model()->find($cr);
+		$number = 9999;
+		if($accred) {
+			$number = $number ^ ($accred->id + 1);
+			$number = '1'.$number;
+		} else {
+			$number = rand(1000,9999);
+			$number = '2'.$number;
+		}
+		$barcode = date('Nymdv').$number.rand(1,9);
 		return $barcode;
 	}
 
